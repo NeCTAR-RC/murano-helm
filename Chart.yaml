@@ -1,0 +1,15 @@
+apiVersion: v2
+name: murano
+description: A Helm chart for murano
+type: application
+version: 1.0.0
+appVersion: b08a76feb5811-14.0.0-7-g6b68cd16
+sources:
+- https://github.com/NeCTAR-RC/murano-helm.git
+dependencies:
+- name: common
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 2.23.0
+- name: nectarlib
+  version: 1.7.8
+  repository: oci://registry.rc.nectar.org.au/nectar-helm

@@ -1,0 +1,10 @@
+{{- include "nectarlib.configmap" (list . "murano.configmap") -}}
+{{- define "murano.configmap" -}}
+data:
+  murano-paste.ini: |
+{{ include "murano-paste" . | indent 4 }}
+  murano-cfapi-paste.ini: |
+{{ include "murano-cfapi-paste" . | indent 4 }}
+  netconfig.yaml: |
+{{ include "netconfig" . | indent 4 }}
+{{- end -}}
