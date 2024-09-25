@@ -67,6 +67,12 @@ engine:
     values: []
   affinity: {}
   resources: {}
+  volumes:
+    - name: var-tmp
+      emptyDir: {}
+  volume_mounts:
+    - name: var-tmp
+      mountPath: /var/tmp/
 
 job:
   db_sync:
