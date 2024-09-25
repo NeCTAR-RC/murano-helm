@@ -15,6 +15,9 @@ ssl=True
 [oslo_messaging_notifications]
 driver=messagingv2
 
+[oslo_middleware]
+enable_proxy_headers_parsing=True
+
 [oslo_policy]
 policy_file=/etc/murano/policy.yaml
 
