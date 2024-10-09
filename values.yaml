@@ -51,6 +51,12 @@ api:
     # requests:
     #   cpu: 100m
     #   memory: 128Mi
+  volumes:
+    - name: var-tmp
+      emptyDir: {}
+  volume_mounts:
+    - name: var-tmp
+      mountPath: /var/tmp/
 
 engine:
   name: engine
