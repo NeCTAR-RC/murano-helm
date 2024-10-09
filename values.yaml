@@ -4,6 +4,9 @@
 
 
 conf:
+  debug: false
+  admin_role: Admin
+  transport_url:
   keystone:
     auth_url:
     username: murano
