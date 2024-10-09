@@ -2,7 +2,7 @@ apiVersion: v2
 name: murano
 description: A Helm chart for murano
 type: application
-version: 1.0.2
+version: 1.0.3
 appVersion: b08a76feb5811-14.0.0-7-g6b68cd16
 sources:
 - https://github.com/NeCTAR-RC/murano-helm.git

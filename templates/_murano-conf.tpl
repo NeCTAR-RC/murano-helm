@@ -28,7 +28,6 @@ auth_type=password
 {{- if .Values.conf.keystone.memcached_servers }}
 memcached_servers={{ join "," .Values.conf.keystone.memcached_servers }}
 {{- end }}
-service_type=application-catalog
 
 [murano]
 url={{ .Values.conf.murano.url }}

@@ -5,7 +5,7 @@
 
 conf:
   debug: false
-  admin_role: Admin
+  admin_role: admin
   transport_url:
   keystone:
     auth_url:
