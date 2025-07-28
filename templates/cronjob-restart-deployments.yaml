@@ -1,0 +1,77 @@
+{{- if .Values.job.periodic_restart.enabled }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "nectarlib.fullname" . }}-periodic-restart
+  labels:
+    {{- include "nectarlib.labels" . | nindent 4 }}
+  {{- with .Values.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "nectarlib.fullname" . }}-periodic-restart
+rules:
+  - apiGroups:
+      - apps
+      - extensions
+    resources:
+      - deployments
+    resourceNames:
+      - murano-api
+      - murano-engine
+    verbs:
+      - get
+      - list
+      - patch
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "nectarlib.fullname" . }}-periodic-restart
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "nectarlib.fullname" . }}-periodic-restart
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "nectarlib.fullname" . }}-periodic-restart
+    namespace: {{ .Release.Namespace | quote }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: periodic-restart
+  labels:
+    {{- include "nectarlib.labels" . | nindent 4 }}
+spec:
+  concurrencyPolicy: Forbid
+  schedule: {{ .Values.job.periodic_restart.cron | quote }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "nectarlib.selectorLabels" . | nindent 12 }}
+        spec:
+          serviceAccountName: {{ include "nectarlib.fullname" . }}-periodic-restart
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          restartPolicy: Never
+          containers:
+            - name: kubectl
+              securityContext:
+                {{- toYaml .Values.securityContext | nindent 16 }}
+              image: bitnami/kubectl
+              command:
+                - kubectl
+                - rollout
+                - restart
+                - deployment/murano-api
+                - deployment/murano-engine
+{{- end }}

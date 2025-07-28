@@ -109,6 +109,9 @@ job:
       - --config-file
       - /etc/murano/murano.conf.d/secrets.conf
       - upgrade
+  periodic_restart:
+    enabled: true
+    cron: "1 */6 * * *"
 
 oslo_policy:
 
