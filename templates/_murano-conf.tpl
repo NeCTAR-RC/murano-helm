@@ -2,6 +2,7 @@
 [DEFAULT]
 bind_host=0.0.0.0
 admin_role={{ .Values.conf.admin_role }}
+log_format=json
 debug={{ .Values.conf.debug }}
 
 [database]
