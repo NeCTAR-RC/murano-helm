@@ -67,7 +67,8 @@ spec:
             - name: kubectl
               securityContext:
                 {{- toYaml .Values.securityContext | nindent 16 }}
-              image: bitnami/kubectl
+              image: registry.rc.nectar.org.au/docker.io/bitnamisecure/kubectl:latest
+              imagePullPolicy: IfNotPresent
               command:
                 - kubectl
                 - rollout
