@@ -57,16 +57,6 @@ api:
   volume_mounts:
     - name: var-tmp
       mountPath: /var/tmp/
-  ingress:
-    enabled: false
-    className: ""
-    annotations: {}
-    hosts:
-      - host: chart-example.local
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    tls: []
   gateway:
     enabled: false
     annotations: {}
