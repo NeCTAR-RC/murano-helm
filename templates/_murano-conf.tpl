@@ -13,6 +13,7 @@ engine_workers=1
 use_trusts=False
 
 [oslo_messaging_rabbit]
+rabbit_transient_queues_ttl=600
 amqp_durable_queues=True
 heartbeat_in_pthread=True
 heartbeat_timeout_threshold=60
@@ -52,6 +53,7 @@ driver=neutron
 driver=messagingv2
 
 [oslo_messaging_rabbit]
+rabbit_transient_queues_ttl=600
 amqp_durable_queues=True
 ssl=True
 rabbit_ha_queues=True
