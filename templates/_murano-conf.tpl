@@ -52,9 +52,9 @@ driver=neutron
 driver=messagingv2
 
 [oslo_messaging_rabbit]
-amqp_durable_queues=True
 ssl=True
-rabbit_ha_queues=True
+rabbit_quorum_queue=True
+rabbit_transient_quorum_queue=True
 
 [oslo_middleware]
 enable_proxy_headers_parsing=True
